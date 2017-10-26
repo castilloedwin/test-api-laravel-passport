@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Listado de Posts</title>
+</head>
+<body>
+	<ul>
+		
+	</ul>
+
+	<script>
+		(function () {
+
+			'use strict';
+
+			if ( localStorage.getItem('token') ) {
+				fetch('http://localhost:8080/api/posts', {
+					method: 'GET',
+					headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
+				})
+				.then(response => {
+					return response.json()
+				})
+				.then(data => {
+					let li = '';
+					data.forEach( (post, index) => {
+						li += '<li>' + post.body + '</li>';
+					})
+					document.querySelector('ul').innerHTML = li;
+				})
+			}
+
+		})();
+	</script>
+</body>
+</html>

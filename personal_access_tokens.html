@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Client Credentials</title>
+</head>
+<body>
+	<div id="wrapper">
+		<form method="POST">
+			<input type="submit" id="resources" value="Obtener Recursos" />
+		</form>
+	</div>
+
+	<script>
+		
+		(function () {
+
+			'use strict';
+
+			let resources = document.getElementById('resources');
+
+			resources.addEventListener('click', function (e) {
+				e.preventDefault();
+				let token = 'Your-Access-Token';
+
+				fetch('http://localhost:8080/api/clients/posts', {
+					method: 'GET',
+					headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' }
+				})
+				.then(response => {
+					return response.json();
+				})
+				.then(data => {
+					console.log(data);
+				})
+			});
+
+		})();
+
+	</script>
+</body>
+</html>
